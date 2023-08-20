@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/HDD%20D/Document%20&amp;%20Media/Document/NetBeansProjects/TheJobs/web/admin.jsp</file>
-            <file>file:/F:/HDD%20D/Document%20&amp;%20Media/Document/NetBeansProjects/TheJobs/web/index.jsp</file>
+            <file>file:/F:/HDD%20D/Document%20&amp;%20Media/Document/NetBeansProjects/TheJobs/src/java/code/ConsultantAddSeervlet.java</file>
+            <file>file:/F:/HDD%20D/Document%20&amp;%20Media/Document/NetBeansProjects/TheJobs/src/java/code/consultantDelServlet.java</file>
             <file>file:/F:/HDD%20D/Document%20&amp;%20Media/Document/NetBeansProjects/TheJobs/src/java/code/AdminServlet.java</file>
-            <file>file:/F:/HDD%20D/Document%20&amp;%20Media/Document/NetBeansProjects/TheJobs/src/java/code/LoginServlet.java</file>
+            <file>file:/F:/HDD%20D/Document%20&amp;%20Media/Document/NetBeansProjects/TheJobs/web/consultant.jsp</file>
+            <file>file:/F:/HDD%20D/Document%20&amp;%20Media/Document/NetBeansProjects/TheJobs/web/consultantEdit.jsp</file>
         </group>
     </open-files>
 </project-private>

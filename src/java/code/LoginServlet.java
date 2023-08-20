@@ -99,7 +99,14 @@ public class LoginServlet extends HttpServlet {
                     if (roleId == 1) {
                         tableName = "admin";
                         roleName = "Admin Account";
+                   
+                    }else if(roleId == 2){
+                        tableName = "consultant";
+                        roleName = "Consultant Account";
                         
+                    }else if(roleId == 3){
+                        tableName = "receptionist";
+                        roleName = "Receptionist Account";
                     }
 
                     String infoQuery = "SELECT * FROM " + tableName + " WHERE userId = ?";
@@ -111,7 +118,9 @@ public class LoginServlet extends HttpServlet {
                     if (infoResultSet.next()) {
                         
                         String name = infoResultSet.getString("name");
-                        
+                        String address = infoResultSet.getString("address");
+                        String email = infoResultSet.getString("email");
+                        String telephone = infoResultSet.getString("telephone");
 
                         // Set user role in the session
                         HttpSession session = request.getSession();
@@ -119,14 +128,17 @@ public class LoginServlet extends HttpServlet {
                         session.setAttribute("roleId", roleId);
                         session.setAttribute("name", name);
                         session.setAttribute("roleName", roleName);
+                        session.setAttribute("address", address);
+                        session.setAttribute("email", email);
+                        session.setAttribute("telephone", telephone);
                     }
 
                     // Redirect to user dashboard based on role
-                    if (roleId == 1) {
-                        response.sendRedirect("dashboard.jsp"); // Admin dashboard
-                    } else {
-                        response.sendRedirect("user.jsp");  // User dashboard
-                    }
+                    
+                        response.sendRedirect("dashboard.jsp"); 
+                    
+                    
+                   
                 } else {
                     // Passwords do not match, authentication failed
                     String errorMessage = "Invalid username or password";

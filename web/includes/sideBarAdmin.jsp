@@ -38,7 +38,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="consultant.jsp" class="nav-link <%= request.getRequestURI().endsWith("consultant.jsp") ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Manage consultants</p>
                             </a>
@@ -58,7 +58,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="receptionist.jsp" class="nav-link <%= request.getRequestURI().endsWith("receptionist.jsp") ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Manage Receptionist</p>
                             </a>
