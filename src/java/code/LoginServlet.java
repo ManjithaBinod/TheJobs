@@ -99,14 +99,14 @@ public class LoginServlet extends HttpServlet {
                     if (roleId == 1) {
                         tableName = "admin";
                         roleName = "Admin Account";
-                   
-                    }else if(roleId == 2){
+
+                    } else if (roleId == 2) {
                         tableName = "consultant";
                         roleName = "Consultant Account";
-                        
-                    }else if(roleId == 3){
-                        tableName = "receptionist";
-                        roleName = "Receptionist Account";
+
+                    } else if (roleId == 3) {
+                        tableName = "applicant";
+                        roleName = "Job Seeker Account";
                     }
 
                     String infoQuery = "SELECT * FROM " + tableName + " WHERE userId = ?";
@@ -116,11 +116,19 @@ public class LoginServlet extends HttpServlet {
                     infoResultSet = infoStatement.executeQuery();
 
                     if (infoResultSet.next()) {
-                        
+                        int consId = -1;
+                        int aplId = -1;
+
                         String name = infoResultSet.getString("name");
                         String address = infoResultSet.getString("address");
                         String email = infoResultSet.getString("email");
                         String telephone = infoResultSet.getString("telephone");
+
+                        if (roleId == 2) {
+                            consId = infoResultSet.getInt("consId");
+                        } else if (roleId == 3) {
+                            aplId = infoResultSet.getInt("aplId");
+                        }
 
                         // Set user role in the session
                         HttpSession session = request.getSession();
@@ -131,14 +139,13 @@ public class LoginServlet extends HttpServlet {
                         session.setAttribute("address", address);
                         session.setAttribute("email", email);
                         session.setAttribute("telephone", telephone);
+                        session.setAttribute("consId", consId);
+                        session.setAttribute("aplId", aplId);
                     }
 
                     // Redirect to user dashboard based on role
-                    
-                        response.sendRedirect("dashboard.jsp"); 
-                    
-                    
-                   
+                    response.sendRedirect("dashboard.jsp");
+
                 } else {
                     // Passwords do not match, authentication failed
                     String errorMessage = "Invalid username or password";

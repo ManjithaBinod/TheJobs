@@ -86,6 +86,8 @@ public class ConsultantAddSeervlet extends HttpServlet {
         String address = request.getParameter("address");
         String email = request.getParameter("email");
         String tel = request.getParameter("tel");
+        String country = request.getParameter("country");
+        String jobs = request.getParameter("jobs");
         String password = request.getParameter("password");
         String userName = request.getParameter("userName");
         PreparedStatement userStatement = null;
@@ -136,13 +138,15 @@ public class ConsultantAddSeervlet extends HttpServlet {
 
                 if (userId != -1) {
                     // Insert into admin table using the retrieved user ID
-                    String adminQuery = "INSERT INTO consultant (userId, name, address, email, telephone) VALUES (?, ?, ?, ?, ?)";
+                    String adminQuery = "INSERT INTO consultant (userId, name, address, email, telephone, country, jobType) VALUES (?, ?, ?, ?, ?, ?, ?)";
                     adminStatement = con.prepareStatement(adminQuery);
                     adminStatement.setInt(1, userId);
                     adminStatement.setString(2, name);
                     adminStatement.setString(3, address);
                     adminStatement.setString(4, email);
                     adminStatement.setString(5, tel);
+                    adminStatement.setString(6, country);
+                    adminStatement.setString(7, jobs);
                     adminStatement.executeUpdate();
 
                     String successMessage = "Consultant Added Successfully";

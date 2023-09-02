@@ -3,7 +3,7 @@
 <%@page import="java.sql.Connection"%>
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/navjsp.jsp" %>
-<%@ include file="includes/sideBarRecep.jsp" %>
+<%@ include file="includes/sideBarAdmin.jsp" %>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="code.DbConnection"%>
 
@@ -31,10 +31,7 @@
             <div class="col-md-5">
 
             </div>
-            <div class="col-md-2">
-                <a type="button" data-toggle="modal" data-target="#modal-default" href="#" class="btn btn-block bg-gradient-primary btn-md">Add Job Seeker</a> <br>
-
-            </div>            
+                   
             <div class="col-md-5"></div>
         </div>
 
@@ -76,7 +73,7 @@
                             DbConnection dbc = new DbConnection();
                             connection = dbc.getConnection();
 
-                            String query = "SELECT * FROM seekers";
+                            String query = "SELECT * FROM applicant";
                             statement = connection.prepareStatement(query);
                             resultSet = statement.executeQuery();
                             int count = 0;
@@ -97,8 +94,7 @@
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu" role="menu" style="">
-                                        <a class="dropdown-item edit-link" href="applicantEdit.jsp?userId=<%= resultSet.getInt("skId")%>" >Edit</a>
-                                        <a class="dropdown-item"  href="applicantDelServlet?userId=<%= resultSet.getInt("skId")%>" onclick="return confirmWithSweetAlert(this)">Delete</a>
+                                        <a class="dropdown-item"  href="applicantDelServlet?userId=<%= resultSet.getInt("aplId")%>" onclick="return confirmWithSweetAlert(this)">Delete</a>
 
                                     </div>
                                 </div>

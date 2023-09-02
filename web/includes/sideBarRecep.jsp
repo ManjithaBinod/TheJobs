@@ -58,7 +58,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="Appointment.jsp" class="nav-link <%= request.getRequestURI().endsWith("Appointment.jsp") ? "active" : "" %>">
+                            <a href="appointment.jsp" class="nav-link <%= request.getRequestURI().endsWith("appointment.jsp") ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Schedule Appointment</p>
                             </a>

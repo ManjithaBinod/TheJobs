@@ -82,6 +82,8 @@ public class ConsultantEditServlet extends HttpServlet {
     String address = request.getParameter("address");
     String email = request.getParameter("email");
     String tel = request.getParameter("tel");
+    String country = request.getParameter("country");
+    String jobs = request.getParameter("jobs");
     String userIdStr = request.getParameter("userId");
     int userId = Integer.parseInt(userIdStr);
 
@@ -93,13 +95,15 @@ public class ConsultantEditServlet extends HttpServlet {
         con = dbc.getConnection();
 
         // Use placeholders in the query and set values using prepared statement
-        String query = "UPDATE consultant SET name = ?, address = ?, email = ?, telephone = ? WHERE userId = ?";
+        String query = "UPDATE consultant SET name = ?, address = ?, email = ?, telephone = ?, country = ?, jobType = ? WHERE userId = ?";
         preparedStatement = con.prepareStatement(query);
         preparedStatement.setString(1, name);
         preparedStatement.setString(2, address);
         preparedStatement.setString(3, email);
         preparedStatement.setString(4, tel);
-        preparedStatement.setInt(5, userId);
+        preparedStatement.setString(5, country);
+        preparedStatement.setString(6, jobs);
+        preparedStatement.setInt(7, userId);
 
         preparedStatement.executeUpdate();
 

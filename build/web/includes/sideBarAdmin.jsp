@@ -2,7 +2,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../../index3.html" class="brand-link">
+    <a href="./dashboard.jsp" class="brand-link">
         <img src="dist/img/seeker.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">The Jobs</span>
     </a>
@@ -69,7 +69,6 @@
                 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-
                         <i class="nav-icon fa-regular fa-file"></i>
                         <p>
                             Reports
@@ -78,15 +77,22 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                             <a href="consultant.jsp" class="nav-link <%= request.getRequestURI().endsWith("consultant.jsp") ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Report 1</p>
+                                <p>Consultant List</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Report 2</p>
+                           <a href="applicant.jsp" class="nav-link <%= request.getRequestURI().endsWith("applicant.jsp") ? "active" : "" %>">
+                                  <i class="far fa-circle nav-icon"></i>
+                                <p>Job Seekers</p>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                           <a href="allAppointments.jsp" class="nav-link <%= request.getRequestURI().endsWith("allAppointments.jsp") ? "active" : "" %>">
+                                  <i class="far fa-circle nav-icon"></i>
+                                <p>Appointments Report</p>
                             </a>
                         </li>
 

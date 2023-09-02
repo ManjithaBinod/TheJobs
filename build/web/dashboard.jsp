@@ -11,7 +11,7 @@
 <% } else if (roleId == 2) { %>
 <%@ include file="includes/sideBarCons.jsp" %>
 <%} else if (roleId == 3) {%> 
-<%@ include file="includes/sideBarRecep.jsp" %>
+<%@ include file="includes/sideBarApl.jsp" %>
 <% } %>
 
 
@@ -32,6 +32,7 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">User Profile</li>
+                           
                         </ol>
                     </div>
                 </div>
@@ -58,7 +59,7 @@
                                 <h3 class="profile-username text-center">${sessionScope.name}</h3>
 
                                 <p class="text-muted text-center">${sessionScope.roleName}</p>
-
+                                 
                                 <ul class="list-group list-group-unbordered mb-3">
                                     <li class="list-group-item">
                                         <b>Address</b> <a class="float-right">${sessionScope.address}</a>

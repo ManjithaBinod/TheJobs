@@ -63,6 +63,8 @@
                             <th>Address</th>
                             <th>E-mail(s)</th>
                             <th>Telephone</th>
+                            <th>Country</th>
+                            <th>Job Type</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -89,6 +91,8 @@
                             </td>
                             <td><%= resultSet.getString("email")%></td>
                             <td><%= resultSet.getString("telephone")%></td>
+                            <td><%= resultSet.getString("country")%></td>
+                            <td><%= resultSet.getString("jobType")%></td>
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-info">Action</button>
@@ -113,6 +117,8 @@
                             <th>Address</th>
                             <th>E-mail(s)</th>
                             <th>Telephone</th>
+                            <th>Country</th>
+                            <th>Job Type</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -137,9 +143,8 @@
                 </button>
             </div>
             <div class="modal-body">
-
+                
                 <form action="ConsultantAddSeervlet" method="POST">
-
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -158,6 +163,21 @@
                             <input type="text" class="form-control" name="tel" placeholder="Mobile No" required>
                         </div>
                         <div class="form-group">
+                            <label for="country">Specialized Country</label>
+                            <input type="text" class="form-control" name="country" placeholder="Specialized Country" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="jobs">Specialized Job Category</label>
+                            <select id="jobs" name="jobs" class="form-control">
+                                <option value="-1" Selected >Select Job Category</option>
+                                <option value="ICT" >ICT</option>
+                                <option value="Business" >Business Management</option>
+                                <option value="Accounting" >Accounting</option>
+                                <option value="Networking" >Networking</option>
+                                <option value="Labour" >Labour</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="userName">User Name</label>
                             <input type="text" class="form-control" name="userName" placeholder="Enter User Name" required>
                         </div>
@@ -171,11 +191,11 @@
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
+                 
                 </form>
+                 
             </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            
         </div>
         <!-- /.modal-content -->
     </div>
@@ -202,7 +222,7 @@
 
 
 <script>
-    
+
     $(function () {
         $("#example1").DataTable({
             "responsive": true, "lengthChange": false, "autoWidth": false,
@@ -254,14 +274,14 @@
 
 
 <% String errorMessage = (String) session.getAttribute("errorMessage");
-    if (Objects.nonNull(errorMessage)) { %>
+    if (Objects.nonNull(errorMessage)) {%>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.all.min.js"></script>
 <script>
     Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: '<%= errorMessage%>',
-        
+
     }).then(function () {
     <%-- Remove the session attribute after displaying the message --%>
     <% session.removeAttribute("errorMessage"); %>

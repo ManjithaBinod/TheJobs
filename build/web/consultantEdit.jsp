@@ -19,6 +19,8 @@
     String address = null;
     String email = null;
     String telephone = null;
+    String country = null;
+    String jobType = null;
     int useerId = -1;
 
     String query = "SELECT * FROM consultant WHERE userId = ?";
@@ -31,6 +33,8 @@
         address = resultSet.getString("address");
         email = resultSet.getString("email");
         telephone = resultSet.getString("telephone");
+        country = resultSet.getString("country");
+        jobType = resultSet.getString("jobType");
         userId = resultSet.getInt("userId");
     }
 
@@ -41,21 +45,21 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-     <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
 
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="dashboard.jsp">Home</a></li>
-                            <li class="breadcrumb-item active">Consultants</li>
-                        </ol>
-                    </div>
                 </div>
-            </div><!-- /.container-fluid -->
-        </section>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="dashboard.jsp">Home</a></li>
+                        <li class="breadcrumb-item active">Consultants</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
 
     <section class="content">
         <div class="container-fluid">
@@ -75,7 +79,7 @@
                                 <div class="form-group">
                                     <input type="hidden" name="userId" required value="<%= userId%>" >
                                     <label for="name">Name</label>
-                              
+
                                     <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name" required value="<%= name%>" >
                                 </div>
 
@@ -92,6 +96,21 @@
                                     <label for="tel">Telephone</label>
                                     <input type="text" class="form-control" name="tel" placeholder="Mobile No" required value="<%= telephone%>" >
                                 </div>
+                                <div class="form-group">
+                                    <label for="country">Specialized Country</label>
+                                    <input type="text" class="form-control" name="country" value="<%= country%>" required>
+                                </div>
+                                <div class="form-group">
+                            <label for="jobs">Specialized Job Category</label>
+                            <select id="jobs" name="jobs" class="form-control">
+                                <option value="<%= jobType%>" Selected ><%= jobType%></option>
+                                <option value="ICT" >ICT</option>
+                                <option value="-Business" >Business Management</option>
+                                <option value="Accounting" >Accounting</option>
+                                <option value="Networking" >Networking</option>
+                                <option value="Labour" >Labour</option>
+                            </select>
+                        </div>
                             </div>
                             <!-- /.card-body -->
 

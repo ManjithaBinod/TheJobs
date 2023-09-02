@@ -84,30 +84,75 @@ public class applicantAddServlet extends HttpServlet {
         String address = request.getParameter("address");
         String email = request.getParameter("email");
         String tel = request.getParameter("tel");
+        String password = request.getParameter("password");
+        String userName = request.getParameter("userName");
         PreparedStatement userStatement = null;
         PreparedStatement adminStatement = null;
         PreparedStatement nameStatement = null;
         ResultSet resultSet = null;
         Connection con = null;
 
+        // Hash the password using bcrypt
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
         try {
 
             DbConnection dbc = new DbConnection();
             con = dbc.getConnection();
 
-            // Insert into seekers table 
-            String adminQuery = "INSERT INTO seekers (name, address, email, telephone) VALUES (?, ?, ?, ?)";
-            adminStatement = con.prepareStatement(adminQuery);
-            adminStatement.setString(1, name);
-            adminStatement.setString(2, address);
-            adminStatement.setString(3, email);
-            adminStatement.setString(4, tel);
-            adminStatement.executeUpdate();
+            //check user name if already exsits
+            String nameQuery = "SELECT * FROM user WHERE userName = ? ";
+            nameStatement = con.prepareStatement(nameQuery);
+            nameStatement.setString(1, userName);
+            resultSet = nameStatement.executeQuery();
 
-            String successMessage = "Applicant Added Successfully";
-            request.getSession().setAttribute("successMessage", successMessage); // Store in session
+            if (resultSet.next()) {
 
-            response.sendRedirect("applicant.jsp");
+                String errorMessage = "User name already exists !";
+                request.getSession().setAttribute("errorMessage", errorMessage); // Store in session
+
+                response.sendRedirect("index.jsp");
+                
+            } else {
+
+                // Insert into user table
+                String userQuery = "INSERT INTO user (userName, password, roleId) VALUES (?, ?, ?)";
+                userStatement = con.prepareStatement(userQuery, PreparedStatement.RETURN_GENERATED_KEYS);
+                userStatement.setString(1, userName);
+                userStatement.setString(2, hashedPassword);
+                userStatement.setInt(3, 3);
+                userStatement.executeUpdate();
+
+                int userId = -1;
+
+                // Get the auto-generated user ID
+                try (ResultSet generatedKeys = userStatement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        userId = generatedKeys.getInt(1);
+                    }
+                }
+
+                if (userId != -1) {
+                    // Insert into admin table using the retrieved user ID
+                    String adminQuery = "INSERT INTO applicant (userId, name, address, email, telephone) VALUES (?, ?, ?, ?, ?)";
+                    adminStatement = con.prepareStatement(adminQuery);
+                    adminStatement.setInt(1, userId);
+                    adminStatement.setString(2, name);
+                    adminStatement.setString(3, address);
+                    adminStatement.setString(4, email);
+                    adminStatement.setString(5, tel);
+                    adminStatement.executeUpdate();
+
+                    String successMessage = "Registered Successfully";
+                    request.getSession().setAttribute("successMessage", successMessage); // Store in session
+
+                    response.sendRedirect("index.jsp");
+
+                } else {
+                    PrintWriter out = response.getWriter();
+                    out.println("Failed to retrieve user ID.");
+                }
+            }
 
         } catch (SQLException e) {
             PrintWriter out = response.getWriter();
